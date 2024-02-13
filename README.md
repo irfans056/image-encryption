@@ -1,41 +1,112 @@
-# Node.js Keyboard Event Capture
+# Imcrypt
 
-This Node.js script captures keyboard events using the `iohook` library and demonstrates basic usage.
+A CLI that encrypts and decrypts png, jpg, jpeg images to a gibberish image and provides you the key to unlock it later so that you have the complete control of your images.
 
-## Prerequisites
+![GitHub package.json version](https://img.shields.io/github/package-json/v/theninza/imcrypt?style=for-the-badge)&nbsp;
+![GitHub Repo stars](https://img.shields.io/github/stars/theninza/imcrypt?logo=github&style=for-the-badge)
+![npm](https://img.shields.io/npm/dt/imcrypt?style=for-the-badge&logo=npm)
 
-- Node.js installed on your system ([Download Node.js](https://nodejs.org/))
+## Tech-Stack
+
+![Node](https://img.shields.io/badge/NodeJS-05122A?style=for-the-badge&logo=node.js)&nbsp;
+
+## Preview
+
+<a href="https://ibb.co/C0qF3fJ"><img src="https://i.ibb.co/5cdVgPY/Screenshot-2021-12-16-at-2-11-16-PM.png" alt="Screenshot-2021-12-16-at-2-11-16-PM" border="0"></a>
 
 ## Installation
 
-1. Clone this repository or download the `myscript.js` file.
+```sh
+npm i -g imcrypt
+```
 
-2. Open a terminal or command prompt and navigate to the directory containing the script:
+## Usage
 
-   ```bash
-   cd path/to/your/directory
+```sh
+imcrypt <command> [option]
+```
 
-Install the required dependencies:
+or run it directly using npx
 
-npm install iohook
-npm install robotjs
+```sh
+npx imcrypt <command> [option]
+```
 
-Usage
-Run the Node.js script using the following command:
+### commands
 
-node myscript.js
-The script will capture keyboard events and display output in the terminal.
+```sh
+help  #prints help info
+```
 
+### options
 
-Dependencies
-iohook: Library for capturing keyboard and mouse input events.
-robotjs: Library for simulating keyboard and mouse events.
+```sh
+  -e, --encrypt              # The image to encrypt
+  -d, --decrypt              # The image to decrypt
+  -c, --clear                # Clear the console Default: false
+  --noClear                  # Don't clear the console Default: true
+  -v, --version              # Print CLI version Default: false
+  -k, --key                  # The key to use for decryption Default: false
+  -i, --outputImageFileName  # The output image
+  -p, --outputKeyFileName    # The output key
+```
 
+## examples
 
-Notes
-Ensure that you have the necessary permissions to access keyboard events on your operating system.
-This script is for educational purposes. Use responsibly and adhere to the policies and terms of service of your operating system.
+Command
 
+### For encrypting an image myImage.png to encryptedImage.png and saving the key to key.txt
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+```sh
+imcrypt -e myImage.png -i encryptedImageName.png -p keyFile.txt
+```
+
+output
+
+```sh
+ imcrypt  v0.0.1 by theninza
+An image encryption node-js cli
+
+✔ Image read successfully
+✔ Output image file name is valid
+✔ Output key file name is valid
+✔ Image data read successfully
+✔ Key generated successfully
+✔ Image encrypted successfully
+✔ Image saved successfully
+✔ Key saved successfully
+
+✔  Image encrypted successfully  Image encrypted successfully:
+                                  Encrypted image: encryptedImageName.png
+                                  Key: keyFile.txt
+
+ Give it a star on github:  https://github.com/theninza/imcrypt
+```
+
+### For decrypting an image encryptedImage.png with its key key.txt to decryptedImage.png
+
+```sh
+imcrypt -d encryptedImage.png -k key.txt -i decryptedImage.png
+```
+
+output
+
+```sh
+ imcrypt  v0.0.1 by theninza
+An image encryption node-js cli
+
+✔ Image read successfully
+✔ Key read successfully
+✔ Decryption successful
+✔ Image saved successfully
+
+✔  Success  Image decrypted successfully
+
+                        Decrypted Image: decryptedImage.png
+
+ Give it a star on github:  https://github.com/theninza/imcrypt
+```
+
+## Limitations
+
+While encryption and decryption is perfect on the png images. On jpg and jpeg, the operation is not perfect. Jpg and jpeg images are lossy and while encryption and decryption, a few pixels values are changed. The decrypted image is however, very similar to the original image but with a few pixels changed.
